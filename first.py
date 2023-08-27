@@ -1,2 +1,2 @@
-print ("hello worddddddd ")
+print ("hello word")
 
