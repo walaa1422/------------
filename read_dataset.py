@@ -4,7 +4,8 @@ import cv2
 import os
 
 # المسار إلى مجلد الصور
-folder_path = "مسار_المجلد"
+#عشان يشتغل غيري الشرطات لليمين
+folder_path = "C:/Users/SHAHAD/Dropbox/PC/Desktop/pro/dataset/train/fractured"
 
 # الحصول على قائمة بأسماء الملفات في المجلد
 file_names = os.listdir(folder_path)
