@@ -1,4 +1,4 @@
-#تغير حجم الصور ,مو شغال 
+#تغير حجم الصور ,  شغال 
 from PIL import Image
 import os
 
