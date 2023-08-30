@@ -2,7 +2,7 @@ import cv2
 import os
 
 # المسار إلى مجلد الصور
-folder_path = "c:\Users\n67-m\AppData\Local\Temp\Rar$DRa45552.49578\test"
+folder_path ='C:/Users/n67-m/Downloads/train'
 
 # الحصول على قائمة بأسماء الملفات في المجلد
 file_names = os.listdir(folder_path)
