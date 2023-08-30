@@ -5,12 +5,13 @@ import os
 
 # المسار إلى مجلد الصور
 #عشان يشتغل غيري الشرطات لليمين
-folder_path = "C:/Users/SHAHAD/Dropbox/PC/Desktop/pro/dataset/train/fractured"
+folder_path = 'C:/Users/96655/Desktop/qqqq/test'
 
 # الحصول على قائمة بأسماء الملفات في المجلد
 file_names = os.listdir(folder_path)
 
 # استدعاء الصور وعرضها
+
 for file_name in file_names:
     # التحقق من أن الملف هو صورة
     if file_name.endswith(".jpg") or file_name.endswith(".png"):
