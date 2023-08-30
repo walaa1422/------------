@@ -4,7 +4,7 @@ import cv2
 import os
 
 # المسار إلى مجلد الصور
-#عشان يشتغل غيري الشرطات لليمين
+#عشان يشتغل غيري الشرطات لليمين //
 folder_path = "C:/Users/SHAHAD/Dropbox/PC/Desktop/pro/dataset/train/fractured"
 
 # الحصول على قائمة بأسماء الملفات في المجلد
