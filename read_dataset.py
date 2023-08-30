@@ -5,7 +5,7 @@ import os
 
 # المسار إلى مجلد الصور
 #عشان يشتغل غيري الشرطات لليمين
-folder_path = 'C:/Users/96655/Desktop/qqqq/test'
+folder_path = "C:/Users/SHAHAD/Dropbox/PC/Desktop/pro/dataset/train/fractured"
 
 # الحصول على قائمة بأسماء الملفات في المجلد
 file_names = os.listdir(folder_path)
