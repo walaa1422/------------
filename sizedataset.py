@@ -2,6 +2,7 @@
 from PIL import Image
 import os
 
+#غيري الباث لملفاتك اللي عندك
 input_folder = "C:/Users/96655/Desktop/mm/test"
 output_folder = "C:/Users/96655/Desktop/mm/New folder"
 target_size = (100, 100)  # حجم الصور المستهدف
