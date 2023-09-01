@@ -1,5 +1,6 @@
-#ما
+#يشتغل ما
 #عشان نشيك على مسارات الصوروالي خارج المسار نحذفو
+''' 
 import os
 from matplotlib import pyplot as plt
 import cv2
@@ -17,3 +18,4 @@ for image_class in os.listdir(data_dir):
                 os.remove(image_path)
         except Exception as e:
             print('issue with image {}'.format(image_path))
+            '''

@@ -14,3 +14,4 @@ ys = np.array([-3.0,-1.0,1.0,3.0,5.0,7.0],dtype = float)
 model.fit(xs,ys,epochs=500)
 # make prediction
 print(model.predict([10.0]))   # output == 19
+
