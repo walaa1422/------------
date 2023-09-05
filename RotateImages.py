@@ -1,25 +1,32 @@
-#تدوير الصور: - شغال
-from PIL import Image
+#عملية التدوير زاويا 10 درجة 360 - شغال 
+import cv2
+import numpy as np
 import os
 
-def rotate_images(dataset_path, output_path, degrees):
-    for filename in os.listdir(dataset_path):
-        file_path = os.path.join(dataset_path, filename)
-        if os.path.isfile(file_path) and filename.endswith(('.jpg', '.jpeg', '.png')):
-            image = Image.open(file_path)
-            rotated_image = image.rotate(degrees)
-            output_file_path = os.path.join(output_path, filename)
-            rotated_image.save(output_file_path)
-            print(f"تم تدوير الصورة: {file_path} -> {output_file_path}")
+def rotate_image(image, angle):
+    height, width = image.shape[:2]
+    rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), angle, 1)
+    rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
+    return rotated_image
 
-# تحديد مسار مجموعة البيانات
-dataset_path = "C:/Users/USER/OneDrive/Desktop/archive (6)/train/fractured"
+# تحديد المجلد الذي يحتوي على الصور
+source_folder_path = "C:/Users/96655/Desktop/bone-ex/KSEAR"
 
-# تحديد مسار الناتج
-output_path = "C:/Users/USER/OneDrive/Desktop/GitHub/final-project/NewRotation"
+# تحديد المجلد الذي ستُحفظ فيه الصور المدورة
+destination_folder_path = "C:/Users/96655/Desktop/ROTACION/Fractions"
 
-# زاوية التدوير (بالدرجات)
-degrees = 90
+# قراءة جميع ملفات الصور في المجلد
+image_files = os.listdir(source_folder_path)
 
-# استدعاء الدالة لتدوير الصور
-rotate_images(dataset_path, output_path, degrees)
+# عرض الصور المدورة وحفظها
+for image_file in image_files:
+    image_path = os.path.join(source_folder_path, image_file)
+    image = cv2.imread(image_path)
+
+    # دوران الصورة بزواية 360 درجة بمقدار 10 درجات لكل دورة
+    for angle in range(0, 360, 10):
+        rotated_image = rotate_image(image, angle)
+
+        # حفظ الصورة المدورة في المجلد الوجهة
+        destination_image_path = os.path.join(destination_folder_path, f"rotated_{angle}_{image_file}")
+        cv2.imwrite(destination_image_path, rotated_image)
