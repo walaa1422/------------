@@ -35,7 +35,7 @@ def preprocess_images(images):
 
 if __name__ == "__main__":
     source_folder = 'C:/Users/96655/Desktop/bige data/train/fractured'
-    target_folder = 'C:/Users/96655/Desktop/bige data/train/New folder'
+    target_folder = 'C:/Users/96655/Desktop/preimaeg/tr1'
 
     # تحميل الصور من المجلد المصدر
     images = [Image.open(os.path.join(source_folder, filename)) for filename in os.listdir(source_folder)]
