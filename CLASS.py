@@ -6,8 +6,8 @@ from keras import layers
 from keras.preprocessing.image import ImageDataGenerator
 
 # تعيين مسارات المجلدين
-train_data_dir = 'C:/Users/96655/Desktop/preimaeg/tr'
-test_data_dir = 'C:/Users/96655/Desktop/preimaeg/ts'
+train_data_dir = 'C:/Users/96655/Desktop/shapacat/tran'
+test_data_dir = 'C:/Users/96655/Desktop/shapacat/test'
 
 # تحديد حجم الصور والدُفعات
 image_size = (224, 224)#هذا ممكن نحدذفو
@@ -58,3 +58,9 @@ model.fit(train_generator, epochs=10, validation_data=test_generator)
 # تقييم النموذج وحساب الدقة
 test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test accuracy:", test_accuracy)
+
+# تحديد مسار حفظ النموذج كملف .h5
+model_save_path = 'C:/Users/96655/Desktop/model.h5'
+
+# حفظ النموذج
+model.save(model_save_path)
