@@ -2,17 +2,20 @@ import cv2
 import os
 
 # دالة لتحسين الجودة وتغيير حجم الصور وتطبيق تصفية الصورة
+
 def process_image(image):
-    # تحسين الجودة
+
+    
+    #Improve quality
     enhanced_image = cv2.equalizeHist(image)
-
-    # تغيير حجم الصورة
+    #Resize the image
     resized_image = cv2.resize(enhanced_image, (224, 224))
+    #Apply image filter
+    filtered_image = cv2.GaussianBlur(resized_image, (5, 5), 0) 
 
-    # تطبيق تصفية الصورة
-    filtered_image = cv2.GaussianBlur(resized_image, (5, 5), 0)  # مثال باستخدام Gaussian Blur
 
     return filtered_image
+
 
 # مجلد المصدر للصور الشعاعية
 source_folder = 'مسار_مجلد_المصدر'
