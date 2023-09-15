@@ -1,4 +1,4 @@
-#يسوي عملية التدريب لنفس المدل 10 مرات - شغال 
+#يسوي عملية التدريب لنفس المودل 10 مرات - شغال 
 
 import tensorflow as tf 
 from tensorflow import keras 
