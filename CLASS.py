@@ -33,8 +33,8 @@ model.compile(optimizer='adam',
 
 # إعداد توليفة البيانات للتحسين وزيادة البيانات
 train_datagen = ImageDataGenerator(
-    rescale=1./255,  # تسوية قيم البكسل إلى مدى [0, 1]
-    shear_range=0.2,  # تدوير الصور بزاوية
+    #rescale=1./255,  # تسوية قيم البكسل إلى مدى [0, 1]
+    #shear_range=0.2,  # تدوير الصور بزاوية
     zoom_range=0.2,  # تكبير/تصغير الصور
     horizontal_flip=True)  # عكس الصور أفقيًا
 
@@ -60,7 +60,7 @@ test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test accuracy:", test_accuracy)
 
 # تحديد مسار حفظ النموذج كملف .h5
-model_save_path = 'C:/Users/96655/Desktop/Datasetsplitter/modelold.h5'
+model_save_path = 'C:/Users/96655/Desktop/Datasetsplitter/modelold2.h5'
 
 # حفظ النموذج
 model.save(model_save_path)

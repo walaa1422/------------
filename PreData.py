@@ -3,20 +3,20 @@ import os
 import cv2
 
 # المجلد الذي يحتوي على الصور الأصلية
-input_folder = "C:/Users/96655/Desktop/Datasetsplitter/testing/Fractions"
+input_folder = "C:/Users/96655/Desktop/pre/fractions"
 # المجلد الذي سيتم حفظ الصور المصغرة فيه
-output_folder = "C:/Users/96655/Desktop/New folder"
+output_folder = "C:/Users/96655/Desktop/pre/fractionspre"
 # الحجم الجديد المطلوب للصور المصغرة
-new_size = (224, 224)  # (العرض, الارتفاع)
+#new_size = (224, 224)  # (العرض, الارتفاع)
 
 # دالة لتحسين الجودة وتغيير حجم الصور وتطبيق تصفية الصورة
 def process_image(image):
     # Improve quality
     enhanced_image = cv2.equalizeHist(image)
     # Resize the image
-    resized_image = cv2.resize(enhanced_image, new_size)
+    #resized_image = cv2.resize(enhanced_image, new_size)
     # Apply image filter
-    filtered_image = cv2.GaussianBlur(resized_image, (5, 5), 0)
+    filtered_image = cv2.GaussianBlur(enhanced_image, (5, 5), 0)
     return filtered_image
 
 # التأكد من وجود مجلد الإخراج وإنشائه إذا لم يكن موجودًا
