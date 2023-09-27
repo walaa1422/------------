@@ -33,8 +33,8 @@ model.compile(optimizer='adam',
 
 # إعداد توليفة البيانات للتحسين وزيادة البيانات
 train_datagen = ImageDataGenerator(
-    #rescale=1./255,  # تسوية قيم البكسل إلى مدى [0, 1]
-    #shear_range=0.2,  # تدوير الصور بزاوية
+    rescale=1./255,  # تسوية قيم البكسل إلى مدى [0, 1]
+    shear_range=0.2,  # تدوير الصور بزاوية
     zoom_range=0.2,  # تكبير/تصغير الصور
     horizontal_flip=True)  # عكس الصور أفقيًا
 
