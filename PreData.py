@@ -1,59 +1,41 @@
-#الكود كامل لعملية معالجة الصور - شغال 
-from PIL import Image, ImageEnhance
-import imagehash #pip install imagehash 
+from PIL import Image
 import os
+import cv2
 
-def enhance_image_quality(image):
-    enhancer = ImageEnhance.Contrast(image)
-    image = enhancer.enhance(1)  # زيادة التباين بنسبة 200%, اذا كان 1 م راح يفرق نفس الاصلي
-    return image
+# المجلد الذي يحتوي على الصور الأصلية
+input_folder = "C:/Users/96655/Desktop/pre/fractions"
+# المجلد الذي سيتم حفظ الصور المصغرة فيه
+output_folder = "C:/Users/96655/Desktop/pre/fractionspre"
+# الحجم الجديد المطلوب للصور المصغرة
+#new_size = (224, 224)  # (العرض, الارتفاع)
 
-def remove_duplicate_images(images):#تُستخدم لإزالة الصور المكررة من مجموعة الصور
-    image_hashes = []
-    unique_images = []
+# دالة لتحسين الجودة وتغيير حجم الصور وتطبيق تصفية الصورة
+def process_image(image):
+    # Improve quality
+    enhanced_image = cv2.equalizeHist(image)
+    # Resize the image
+    #resized_image = cv2.resize(enhanced_image, new_size)
+    # Apply image filter
+    filtered_image = cv2.GaussianBlur(enhanced_image, (5, 5), 0)
+    return filtered_image
 
-    for img in images:
-        img_hash = str(imagehash.phash(img))
+# التأكد من وجود مجلد الإخراج وإنشائه إذا لم يكن موجودًا
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
 
-        if img_hash not in image_hashes:
-            image_hashes.append(img_hash)
-            unique_images.append(img)
+# قائمة بجميع ملفات الصور في المجلد المصدر
+image_files = [f for f in os.listdir(input_folder) if f.endswith(('.jpg', '.jpeg', '.png', '.bmp', '.gif'))]
 
-    return unique_images
+for image_file in image_files:
+    # فتح الصورة
+    image_path = os.path.join(input_folder, image_file)
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)  # اقرأ الصورة كصورة رمادية
 
-def preprocess_images(images):
-    processed_images = []
-    for img in images:
-        # تغيير حجم الصورة إلى 200x200 بكسل
-        img = img.resize((224,224))
+    # معالجة الصورة
+    processed_image = process_image(image)
 
-        # تحسين الجودة
-        img = enhance_image_quality(img)
+    # حفظ الصور المعالجة في مجلد الإخراج
+    output_path = os.path.join(output_folder, image_file)
+    cv2.imwrite(output_path, processed_image)
 
-        processed_images.append(img)
-    return processed_images
-
-if __name__ == "__main__":
-    source_folder = 'C:/Users/96655/Desktop/bige data/train/fractured'
-    target_folder = 'C:/Users/96655/Desktop/preimaeg/tr1'
-
-    # تحميل الصور من المجلد المصدر
-    images = [Image.open(os.path.join(source_folder, filename)) for filename in os.listdir(source_folder)]
-
-    # تحسين جودة الصور
-    enhanced_images = [enhance_image_quality(img) for img in images]
-
-    # إزالة الصور المكررة
-    unique_images = remove_duplicate_images(enhanced_images)
-
-    # تطبيق عمليات معالجة الصور
-    processed_images = preprocess_images(unique_images)
-
-    # حفظ الصور المعالجة في المجلد المستهدف
-    os.makedirs(target_folder, exist_ok=True)
-    for i, img in enumerate(processed_images):
-        image_name = f'processed_image_{i}.jpg'
-        img.save(os.path.join(target_folder, image_name))
-
-    print(f'تم تحسين جودة وتغيير حجم {len(processed_images)} صورة وحفظها في المجلد المستهدف.')
-
+print(f'تم معالجة وتغيير حجم {len(image_files)} صورة وحفظها في مجلد الإخراج.')
