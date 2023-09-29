@@ -1,32 +1,32 @@
+#عملية التدوير زاويا 10 درجة 360 - شغال 
+import cv2
+import numpy as np
 import os
-from PIL import Image
 
 def rotate_image(image, angle):
-    rotated_image = image.rotate(angle, resample=Image.BICUBIC, expand=True)
+    height, width = image.shape[:2]
+    rotation_matrix = cv2.getRotationMatrix2D((width / 2, height / 2), angle, 1)
+    rotated_image = cv2.warpAffine(image, rotation_matrix, (width, height))
     return rotated_image
 
-# مسار المجلد الذي يحتوي على الصور
-folder_path = 'C:/Users/SHAHAD/Dropbox/PC/Desktop/gg'
-# مسار المجلد لحفظ الصور المدورة
-output_folder = 'C:/Users/SHAHAD/Dropbox/PC/Desktop/hh'
+# تحديد المجلد الذي يحتوي على الصور
+source_folder_path = "C:/Users/96655/Desktop/bone-ex/KSEAR"
 
-# زاوية الدوران الأولية
-initial_angle = 10
+# تحديد المجلد الذي ستُحفظ فيه الصور المدورة
+destination_folder_path = "C:/Users/96655/Desktop/ROTACION/Fractions"
 
-# زاوية الزيادة في كل تكرار
-angle_increment = 10
+# قراءة جميع ملفات الصور في المجلد
+image_files = os.listdir(source_folder_path)
 
-# عدد التكرارات
-num_rotations = 360 // angle_increment
+# عرض الصور المدورة وحفظها
+for image_file in image_files:
+    image_path = os.path.join(source_folder_path, image_file)
+    image = cv2.imread(image_path)
 
-# قراءة كل صورة في المجلد وتنفيذ الدوران وحفظها
-for file_name in os.listdir(folder_path):
-    image_path = os.path.join(folder_path, file_name)
-    image = Image.open(image_path)
-
-    angle = initial_angle
-    for i in range(num_rotations):
+    # دوران الصورة بزواية 360 درجة بمقدار 10 درجات لكل دورة
+    for angle in range(0, 360, 10):
         rotated_image = rotate_image(image, angle)
-        rotated_image_path = os.path.join(output_folder, f'{file_name}_{i}.jpg')
-        rotated_image.save(rotated_image_path)
-        angle += angle_increment
+
+        # حفظ الصورة المدورة في المجلد الوجهة
+        destination_image_path = os.path.join(destination_folder_path, f"rotated_{angle}_{image_file}")
+        cv2.imwrite(destination_image_path, rotated_image)
