@@ -4,8 +4,8 @@ from keras import layers
 from keras.preprocessing.image import ImageDataGenerator
 
 # تعيين مسارات المجلدين
-train_data_dir = 'C:/Users/n67-m/Downloads/data-part/data1/train1'
-test_data_dir = 'C:/Users/n67-m/Downloads/data-part/data1/test1'
+train_data_dir = "C:/Users/n67-m/Downloads/data-part/data1/train1"
+test_data_dir = "C:/Users/n67-m/Downloads/data-part/data1/test1"
 
 # تحديد حجم الصور والدُفعات
 image_size = (224, 224)  # هذا ممكن نحذفه
