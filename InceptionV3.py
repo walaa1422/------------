@@ -25,7 +25,9 @@ output = Dense(num_classes, activation='softmax')(x)  # طبقة الإخراج 
 model = Model(inputs=inception_base.input, outputs=output)
 
 # تجميع النموذج وتحديد معلمات التدريب
-model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=Adam(learning_rate=0.0001),
+               loss='categorical_crossentropy',
+                 metrics=['accuracy'])
 
 # تحديد مولد البيانات لتحميل الصور وتعديلها
 train_datagen = ImageDataGenerator(rescale=1./255,
