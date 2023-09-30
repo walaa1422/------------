@@ -1,11 +1,12 @@
+
 import tensorflow as tf
 from tensorflow import keras
 from keras import layers
 from keras.preprocessing.image import ImageDataGenerator
 
 # تعيين مسارات المجلدين
-train_data_dir = "C:/Users/n67-m/Downloads/data-part/data1/train1"
-test_data_dir = "C:/Users/n67-m/Downloads/data-part/data1/test1"
+train_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data1/train1"
+test_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data1/test1"
 
 # تحديد حجم الصور والدُفعات
 image_size = (224, 224)  # هذا ممكن نحذفه
@@ -58,7 +59,7 @@ test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test accuracy:", test_accuracy)
 
 # تحديد مسار حفظ النموذج كملف .h5
-model_save_path = 'C:/Users/n67-m/Downloads/data-part/modelold1.h5'
+model_save_path = 'C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/modeloldCNNlc.h5'
 
 # حفظ النموذج
 model.save(model_save_path)

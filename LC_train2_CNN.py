@@ -1,18 +1,18 @@
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator
 
 # تعيين مسارات المجلدين للبيانات الجديدة
-new_train_data_dir = 'مسار_مجلد_التدريب_للبيانات_الجديدة'
-new_test_data_dir = 'مسار_مجلد_الاختبار_للبيانات_الجديدة'
+new_train_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data7/train7"
+new_test_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data7/test7"
 
 # تحديد حجم الصور والدُفعات
 image_size = (224, 224)
 batch_size = 32
 
 # تحميل النموذج المحفوظ سابقًا
-model_path = 'C:/Users/96655/Desktop/Datasetsplitter/modelold2.h5'
+model_path = 'C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/modeloldCNNlc.h5'
 loaded_model = load_model(model_path)
 
 # تحديث مسارات المجلدات للبيانات الجديدة
@@ -36,7 +36,7 @@ new_test_generator = new_test_datagen.flow_from_directory(
     class_mode='sparse')
 
 # متابعة التدريب على البيانات الجديدة
-epochs = 1
+epochs = 10
 loaded_model.fit(new_train_generator, epochs=epochs, validation_data=new_test_generator)
 
 # حساب الدقة على بيانات الاختبار
