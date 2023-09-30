@@ -14,6 +14,8 @@ image_size = (224, 224)#هذا ممكن نحدذفو
 batch_size = 32
 
 # تحديد العمارة المعمارية للنموذج CNN
+
+
 model = keras.Sequential([
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(224, 224, 3)),
     layers.MaxPooling2D((2, 2)),
@@ -23,7 +25,7 @@ model = keras.Sequential([
     layers.MaxPooling2D((2, 2)),
     layers.Flatten(),
     layers.Dense(128, activation='relu'),
-    layers.Dense(2, activation='softmax')  # 2 فئات: مكسورة وسليمة
+    layers.Dense(2, activation='softmax')   
 ])
 
 # تحديد الدقة كمقياس للأداء

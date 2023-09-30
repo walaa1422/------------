@@ -15,15 +15,19 @@ test_data_dir = 'C:/Users/96655/Desktop/Datasetsplitter/testing'
 image_size = (224, 224)
 batch_size = 32
 
-# تحميل نموذج ResNet50 مع وزنات مدربة مسبقاً
+
+
+# Load the ResNet50 model with pre-trained weights
 base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
-# إضافة طبقات إلى النموذج
+# Add layers to the model
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
 x = Dense(128, activation='relu')(x)
-x = Dropout(0.5)(x)  # إزالة الارتجاع
+x = Dropout(0.5)(x)   
 predictions = Dense(2, activation='softmax')(x)
+
+
 
 # بناء النموذج النهائي
 model = keras.Model(inputs=base_model.input, outputs=predictions)
