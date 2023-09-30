@@ -56,7 +56,7 @@ model.fit(train_generator, epochs=10, validation_data=test_generator)
 
 # تقييم النموذج وحساب الدقة
 test_loss, test_accuracy = model.evaluate(test_generator)
-print("Test accuracy:", test_accuracy)
+print("Test accuracy:", test_accuracy * 100)
 
 # تحديد مسار حفظ النموذج كملف .h5
 model_save_path = 'C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/modeloldCNNlc.h5'

@@ -41,7 +41,7 @@ loaded_model.fit(new_train_generator, epochs=epochs, validation_data=new_test_ge
 
 # حساب الدقة على بيانات الاختبار
 test_loss, test_accuracy = loaded_model.evaluate(new_test_generator)
-print("Test accuracy after", epochs, "epochs:", test_accuracy)
+print("Test accuracy after", epochs, "epochs:",  "{:.0f}%".format(test_accuracy * 100))
 
 # حفظ النموذج بعد التحديث
 loaded_model.save(model_path)
