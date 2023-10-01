@@ -4,8 +4,8 @@ from tensorflow import keras
 from keras.preprocessing.image import ImageDataGenerator
 
 # تعيين مسارات المجلدين للبيانات الجديدة
-new_train_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data7/train7"
-new_test_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data7/test7"
+new_train_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data4/train4"
+new_test_data_dir = "C:/Users/SHAHAD/Downloads/Telegram Desktop/data-part/data-part/data4/test4"
 
 # تحديد حجم الصور والدُفعات
 image_size = (224, 224)
@@ -41,7 +41,7 @@ loaded_model.fit(new_train_generator, epochs=epochs, validation_data=new_test_ge
 
 # حساب الدقة على بيانات الاختبار
 test_loss, test_accuracy = loaded_model.evaluate(new_test_generator)
-print("Test accuracy after", epochs, "epochs:",  "{:.0f}%".format(test_accuracy * 100))
+print("Test accuracy after", epochs, "epochs:",  "{:.0f}%".format(test_accuracy * 100,"%"))
 
 # حفظ النموذج بعد التحديث
 loaded_model.save(model_path)
