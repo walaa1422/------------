@@ -1,4 +1,3 @@
-#cnn,Inception الدقة = 95 
 import tensorflow as tf
 from keras.applications import InceptionV3
 from keras.layers import Input, Flatten, Dense
