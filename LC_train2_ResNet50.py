@@ -1,65 +1,51 @@
 import tensorflow as tf
-from keras.models import load_model, Model
-from  keras.layers import Dense, GlobalAveragePooling2D
-from  keras.applications import ResNet50
-from  keras.preprocessing.image import ImageDataGenerator
-from  keras.metrics import Accuracy
+from keras.preprocessing.image import ImageDataGenerator
 
-# تحميل النموذج المحفوظ سابقًا
-model_path = 'C:/Users/96655/Desktop/m/resnet50_model.h5'
-saved_model = load_model(model_path)
+# تحميل المودل الأساسي
+model = tf.keras.models.load_model("C:/Users/96655/Desktop/m/model5.h5")
 
-# تحضير البيانات الجديدة
-train_data_dir = 'C:/Users/96655/Downloads/Telegram Desktop/data-part2/data-part2/data1/train1'
-test_data_dir = 'C:/Users/96655/Downloads/Telegram Desktop/data-part2/data-part2/data1/test1'
+# تحديد الدالة الخطأ وخوارزمية التحديث
+optimizer = tf.keras.optimizers.Adam()
 
-batch_size = 32
+# تحديد مسارات مجلدات البيانات الجديدة
+train_data_dir = "C:/Users/96655/Downloads/Telegram Desktop/data-part2/data-part2/data6/train6"
+test_data_dir = "C:/Users/96655/Downloads/Telegram Desktop/data-part2/data-part2/data6/test6"
 
-# تحميل واستعداد البيانات باستخدام ImageDataGenerator
-train_datagen = ImageDataGenerator(rescale=1.0/255.0)
+# تحديد حجم الصور وعدد الفئات
+image_size = (224, 224)  # حجم الصور المتوقع
+batch_size = 32  # حجم الدُفعة (batch size)
+
+# استخدام ImageDataGenerator لتحميل البيانات
+train_datagen = ImageDataGenerator(rescale=1./255)
+test_datagen = ImageDataGenerator(rescale=1./255)
+
 train_generator = train_datagen.flow_from_directory(
     train_data_dir,
-    target_size=(224, 224),
+    target_size=image_size,
     batch_size=batch_size,
-    class_mode='categorical'
+    class_mode='sparse'  # إذا كان لديك فئات غير متوازنة، استخدم 'categorical'
 )
 
-validation_datagen = ImageDataGenerator(rescale=1.0/255.0)
-validation_generator = validation_datagen.flow_from_directory(
+test_generator = test_datagen.flow_from_directory(
     test_data_dir,
-    target_size=(224, 224),
+    target_size=image_size,
     batch_size=batch_size,
-    class_mode='categorical'
+    class_mode='sparse'
 )
 
-# إعداد الطبقات النهائية للنموذج باستخدام ResNet50
-base_model = ResNet50(weights='imagenet', include_top=False)
-x = base_model.output
-x = GlobalAveragePooling2D()(x)
-predictions = Dense(train_generator.num_classes, activation='softmax')(x)
-model = Model(inputs=base_model.input, outputs=predictions)
+# عدد الحلقات (epochs) للتدريب
+epochs = 5
 
-# تجميد طبقات ResNet50 للتدريب
-for layer in base_model.layers:
-    layer.trainable = False
-
-# تجميع النموذج وتحديث الأوزان باستخدام بيانات الجديدة وحساب الدقة
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=[Accuracy()])
-
-# تدريب النموذج مع حساب دقة النموذج باستخدام بيانات الجديدة
-model.fit_generator(
+# عملية التدريب
+model.fit(
     train_generator,
-    steps_per_epoch=train_generator.samples // batch_size,
-    validation_data=validation_generator,
-    validation_steps=validation_generator.samples // batch_size,
-    epochs=10  # عدد الحلقات التدريبية
+    epochs=epochs,
+    validation_data=test_generator
 )
 
-# حساب الدقة على بيانات التحقق بعد اكتمال التدريب
-accuracy = model.evaluate_generator(validation_generator, steps=validation_generator.samples // batch_size)
+# حساب دقة المودل بعد عملية التدريب على البيانات الجديدة
+test_loss, test_accuracy = model.evaluate(test_generator)
 
-# طباعة نسبة الدقة
-print("accuracy :  ", accuracy[1])
-
-# حفظ النموذج المعتمد على ResNet50 بعد التدريب
-model.save('C:/Users/96655/Desktop/m/modeld2.h5')
+# طباعة دقة المودل
+print("Test accuracy:", test_accuracy)
+model.save('C:/Users/96655/Desktop/m/model6.h5')
