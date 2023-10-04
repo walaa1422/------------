@@ -3,14 +3,14 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 # تحديد مسار ملف النموذج المدرب مسبقًا بصيغة .h5
-pretrained_model_path = 'C:/path/to/pretrained_model.h5'
+pretrained_model_path = 'C:/Users/USER/OneDrive/Desktop/inception2_model.h5'
 
 # تحميل النموذج المدرب مسبقًا من ملف .h5
 pretrained_model = load_model(pretrained_model_path)
 
 # تحديد مسارات مجلدي التدريب والاختبار
-train_data_dir = 'C:/Users/USER/OneDrive/Desktop/Dataset splitter/training'
-test_data_dir = 'C:/Users/USER/OneDrive/Desktop/Dataset splitter/testing'
+train_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-3part/data3/train3'
+test_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-3part/data3/test3'
 
 # تحديد عدد الفئات
 num_classes = 2
@@ -39,15 +39,13 @@ test_generator = test_datagen.flow_from_directory(test_data_dir,
                                                   class_mode='categorical')
 
 # تدريب النموذج ومراقبة الدقة
-history = pretrained_model.fit(train_generator, epochs=5, validation_data=test_generator)
+history = pretrained_model.fit(train_generator, epochs=10, validation_data=test_generator)
 
 # استخدام دالة evaluate لحساب الدقة على مجموعة الاختبار
 test_loss, test_accuracy = pretrained_model.evaluate(test_generator)
 test_accuracy_percentage = test_accuracy * 100
 print("Test Accuracy:", test_accuracy_percentage, "%")
 
-# تحديد مسار حفظ النموذج كملف .h5 (اختياري)
-model_save_path = 'C:/path/to/pretrained_model_finetuned.h5'
+# حفظ النموذج مع التغييرات على نفس ملف النموذج القديم
+pretrained_model.save(pretrained_model_path)
 
-# حفظ النموذج (اختياري)
-pretrained_model.save(model_save_path)

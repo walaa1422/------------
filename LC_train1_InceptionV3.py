@@ -6,8 +6,8 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 # تحديد مسارات مجلدي التدريب والاختبار
-train_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-part2/data1/train1'
-test_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-part2/data1/test1'
+train_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-complete1/trainN'
+test_data_dir = 'C:/Users/USER/OneDrive/Desktop/data-complete1/teastT'
 
 # تحديد عدد الفئات
 num_classes = 2
@@ -25,16 +25,16 @@ model = Model(inputs=inception_base.input, outputs=output)
 
 # تجميع النموذج وتحديد معلمات التدريب
 model.compile(optimizer=Adam(learning_rate=0.0001),
-               loss='categorical_crossentropy',
-                 metrics=['accuracy'])
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
 
 # تحديد مولد البيانات لتحميل الصور وتعديلها
-train_datagen = ImageDataGenerator(rescale=1./255,
+train_datagen = ImageDataGenerator(rescale=1. / 255,
                                    shear_range=0.2,
                                    zoom_range=0.2,
                                    horizontal_flip=True)
 
-test_datagen = ImageDataGenerator(rescale=1./255)
+test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 train_generator = train_datagen.flow_from_directory(train_data_dir,
                                                     target_size=(224, 224),
@@ -51,10 +51,11 @@ history = model.fit(train_generator, epochs=10, validation_data=test_generator)
 
 # استخدام دالة evaluate لحساب الدقة على مجموعة الاختبار
 test_loss, test_accuracy = model.evaluate(test_generator)
-print("Test Accuracy:", test_accuracy)
+test_accuracy_percentage = test_accuracy * 100
+print("Test Accuracy:", test_accuracy_percentage, "%")
 
 # تحديد مسار حفظ النموذج كملف .h5
-model_save_path = 'C:/Users/USER/OneDrive/Desktop/inception1_model.h5'
+model_save_path = 'C:/Users/USER/OneDrive/Desktop/inception1_model-allData-acc.h5'
 
 # حفظ النموذج
 model.save(model_save_path)
