@@ -43,7 +43,6 @@ train_generator = train_datagen.flow_from_directory(
     target_size=image_size,
     batch_size=batch_size,
     class_mode='sparse')   
-
 test_datagen = ImageDataGenerator(rescale=1./255)   
 test_generator = test_datagen.flow_from_directory(
     test_data_dir,
@@ -57,7 +56,5 @@ model.fit(train_generator, epochs=10, validation_data=test_generator)
 # Evaluate the model and calculate accuracy
 test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test accuracy:", test_accuracy)
-
 model_save_path = 'C:/Users/96655/Desktop/Datasetsplitter/modelold2.h5'
-
 model.save(model_save_path)
