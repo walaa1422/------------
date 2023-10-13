@@ -29,7 +29,6 @@ model = keras.Sequential([
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
-
 # Prepare data combination for optimization and data augmentation
 train_datagen = ImageDataGenerator(
     rescale=1./255,   
