@@ -5,17 +5,15 @@ from tensorflow import keras
 from keras import layers
 from keras.preprocessing.image import ImageDataGenerator
 
-# تعيين مسارات المجلدين
+# Set the paths of the two folders
 train_data_dir = 'C:/Users/96655/Desktop/Datasetsplitter/training'
 test_data_dir = 'C:/Users/96655/Desktop/Datasetsplitter/testing'
 
-# تحديد حجم الصور والدُفعات
-image_size = (224, 224)#هذا ممكن نحدذفو
+# Define the size of images and batches
+image_size = (224, 224) 
 batch_size = 32
 
-# تحديد العمارة المعمارية للنموذج CNN
-
-
+# Define the architecture of the CNN model
 model = keras.Sequential([
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(224, 224, 3)),
     layers.MaxPooling2D((2, 2)),
@@ -25,44 +23,41 @@ model = keras.Sequential([
     layers.MaxPooling2D((2, 2)),
     layers.Flatten(),
     layers.Dense(128, activation='relu'),
-    layers.Dense(2, activation='softmax')   
-])
+    layers.Dense(2, activation='softmax')])
 
-# تحديد الدقة كمقياس للأداء
+# Define accuracy as a measure of performance
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-# إعداد توليفة البيانات للتحسين وزيادة البيانات
+# Prepare data combination for optimization and data augmentation
 train_datagen = ImageDataGenerator(
-    rescale=1./255,  # تسوية قيم البكسل إلى مدى [0, 1]
-    shear_range=0.2,  # تدوير الصور بزاوية
-    zoom_range=0.2,  # تكبير/تصغير الصور
-    horizontal_flip=True)  # عكس الصور أفقيًا
+    rescale=1./255,   
+    shear_range=0.2,  
+    zoom_range=0.2,   
+    horizontal_flip=True)   
 
-# تحميل البيانات وتحضيرها
+# Download and prepare data
 train_generator = train_datagen.flow_from_directory(
     train_data_dir,
     target_size=image_size,
     batch_size=batch_size,
-    class_mode='sparse')  # تحديد الفئات على أنها sparse
+    class_mode='sparse')   
 
-test_datagen = ImageDataGenerator(rescale=1./255)  # تسوية قيم البكسل لمجموعة الاختبار
+test_datagen = ImageDataGenerator(rescale=1./255)   
 test_generator = test_datagen.flow_from_directory(
     test_data_dir,
     target_size=image_size,
     batch_size=batch_size,
-    class_mode='sparse')  # تحديد الفئات على أنها sparse
+    class_mode='sparse')   
 
-# تدريب النموذج
+# Train the model
 model.fit(train_generator, epochs=10, validation_data=test_generator)
 
-# تقييم النموذج وحساب الدقة
+# Evaluate the model and calculate accuracy
 test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test accuracy:", test_accuracy)
 
-# تحديد مسار حفظ النموذج كملف .h5
 model_save_path = 'C:/Users/96655/Desktop/Datasetsplitter/modelold2.h5'
 
-# حفظ النموذج
 model.save(model_save_path)
