@@ -30,11 +30,10 @@ predictions = Dense(2, activation='softmax')(x)
 model = keras.Model(inputs=base_model.input, outputs=predictions) 
  
 # Assemble the model
-optimizer = Adam(learning_rate=0.0001)  # ضبط معدل التعلم 
+optimizer = Adam(learning_rate=0.0001)   
 model.compile(optimizer=optimizer, 
               loss='sparse_categorical_crossentropy', 
               metrics=['accuracy']) 
- 
 # Improve weight distribution to handle imbalanced data
 train_datagen = ImageDataGenerator( 
     rescale=1./255, 
