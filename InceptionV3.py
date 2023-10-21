@@ -52,3 +52,4 @@ test_loss, test_accuracy = model.evaluate(test_generator)
 print("Test Accuracy:", test_accuracy)
 model_save_path = 'C:/Users/USER/OneDrive/Desktop/inception1_model.h5'
 model.save(model_save_path)
+
