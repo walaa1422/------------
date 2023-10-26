@@ -13,13 +13,13 @@ test_data_dir = 'C:/Users/96655/Downloads/Telegram Desktop/data-complete1/data-c
 
 # Define the size of images and batches
 image_size = (224, 224) 
-batch_size = 32 
+batch_size = 32
  
 # Load the ResNet50 model with pre-trained weights 
 base_model = ResNet50(weights='imagenet', include_top=False, input_shape=(224, 224, 3)) 
 x = base_model.output 
 x = GlobalAveragePooling2D()(x) 
-x = BatchNormalization()(x)   
+x = BatchNormalization()(x)
 x = Dense(128, activation='relu')(x) 
 x = Dropout(0.5)(x) 
 predictions = Dense(2, activation='softmax')(x) 
