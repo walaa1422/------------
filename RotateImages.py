@@ -1,4 +1,3 @@
-#عملية التدوير زاويا 10 درجة 360 - شغال 
 import os
 from PIL import Image
 
@@ -6,22 +5,22 @@ def rotate_image(image, angle):
     rotated_image = image.rotate(angle, resample=Image.BICUBIC, expand=True)
     return rotated_image
 
-# مسار المجلد الذي يحتوي على الصور
+# Path to the folder containing the images
 folder_path = 'path_to_folder'
 
-# مسار المجلد لحفظ الصور المدورة
+# Path to the folder to save the rotated images
 output_folder = 'path_to_output_folder'
 
-# زاوية الدوران الأولية
+# Initial rotation angle
 initial_angle = 10
 
-# زاوية الزيادة في كل تكرار
+# Angle increment for each iteration
 angle_increment = 10
 
-# عدد التكرارات
+# Number of iterations
 num_rotations = 360 // angle_increment
 
-# قراءة كل صورة في المجلد وتنفيذ الدوران وحفظها
+# Read each image in the folder, perform rotation, and save it
 for file_name in os.listdir(folder_path):
     image_path = os.path.join(folder_path, file_name)
     image = Image.open(image_path)
