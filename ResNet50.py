@@ -1,5 +1,3 @@
-#اصدار اخر من القرثيم Cnn الدقة = 95 
-
 import tensorflow as tf 
 from tensorflow import keras 
 from keras.preprocessing.image import ImageDataGenerator 
