@@ -17,7 +17,7 @@ if __name__ == '__main__':
     model = tensorflow.keras.models.load_model('C:/Users/SHAHAD/Dropbox/PC/Desktop/TM/converted_keras/keras_model.h5')
 
     correct = 0
-    for i in range(2):  # تغيير المدى إلى 2 بدلاً من 10
+    for i in range(2):  
         filenames = os.listdir(os.path.join(testing_dir, str(i)))  # mnist_png/testing/1
 
         for filename in filenames:
@@ -32,7 +32,7 @@ if __name__ == '__main__':
             # resize the image to a 224x224 with the same strategy as in TM2:
             # resizing the image to be at least 224x224 and then cropping from the center
             size = (224, 224)
-            image = ImageOps.fit(image, size, Image.LANCZOS)  # تغيير Image.ANTIALIAS إلى Image.LANCZOS
+            image = ImageOps.fit(image, size, Image.LANCZOS) 
 
             # turn the image into a numpy array
             image_array = np.asarray(image)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
             # Normalize the image
             normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
-            normalized_image_array = np.squeeze(normalized_image_array)  # إزالة البُعد الإضافي
+            normalized_image_array = np.squeeze(normalized_image_array)  
 
             # Load the image into the array
             data[0] = normalized_image_array
